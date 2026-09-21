@@ -55,6 +55,7 @@ export default function App() {
         return {
           id: prod.id,
           name: prod.name,
+          tamilName: prod.tamilName,
           unit: prod.unit,
           quantity: quantity
         };
@@ -62,15 +63,17 @@ export default function App() {
       .filter(Boolean);
   }, [selections, allProducts]);
 
-  // Filter products by category and search term
+  // Filter products by category and search term (English or Tamil)
   const filteredProducts = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
     return allProducts.filter((product) => {
       const matchesCategory =
         activeCategory === "All" || product.category === activeCategory;
 
       const matchesSearch =
-        !searchQuery.trim() ||
-        product.name.toLowerCase().includes(searchQuery.toLowerCase().trim());
+        !query ||
+        product.name.toLowerCase().includes(query) ||
+        (product.tamilName && product.tamilName.toLowerCase().includes(query));
 
       return matchesCategory && matchesSearch;
     });

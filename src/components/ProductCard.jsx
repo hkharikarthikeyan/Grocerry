@@ -29,7 +29,12 @@ export default function ProductCard({ product, isSelected, quantity, onToggleSel
       <div className="card-top-row">
         <div className="product-info">
           <span className="product-icon">{product.icon}</span>
-          <span className="product-name">{product.name}</span>
+          <div className="product-names">
+            <span className="product-name">{product.name}</span>
+            {product.tamilName && (
+              <span className="product-tamil-name">{product.tamilName}</span>
+            )}
+          </div>
         </div>
         <div className={`selection-badge ${isSelected ? "active" : ""}`}>
           {isSelected ? "✓ Selected" : "+ Add"}

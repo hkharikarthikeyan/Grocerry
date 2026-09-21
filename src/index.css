@@ -263,10 +263,23 @@ body {
   font-size: 1.6rem;
 }
 
+.product-names {
+  display: flex;
+  flex-direction: column;
+}
+
 .product-name {
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--color-text-main);
+  line-height: 1.25;
+}
+
+.product-tamil-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 1px;
 }
 
 .selection-badge {

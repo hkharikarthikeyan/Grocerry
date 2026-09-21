@@ -10,7 +10,10 @@ export function generateWhatsAppMessage(selectedItems) {
 
   const header = "🛒 *Grocery List*\n\n";
   const itemsList = selectedItems
-    .map((item, index) => `${index + 1}. ${item.name} - ${item.quantity} ${item.unit}`)
+    .map((item, index) => {
+      const nameDisplay = item.tamilName ? `${item.name} (${item.tamilName})` : item.name;
+      return `${index + 1}. ${nameDisplay} - ${item.quantity} ${item.unit}`;
+    })
     .join("\n");
   const footer = "\n\nPlease buy these items.\nThank you ❤️";
 
