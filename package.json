@@ -1,0 +1,7 @@
+{
+  "name": "grocerry-root",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix Foo run build"
+  }
+}
