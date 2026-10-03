@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "../config";
 
 const STATUS_STEPS = [
   { key: "PLACED",            label: "Order Placed",      icon: "📋", color: "#3b82f6" },
@@ -202,7 +203,7 @@ export default function TrackingPage({ token }) {
     if (!token) return;
     async function fetchOrders() {
       try {
-        const res = await fetch("http://localhost:5000/api/orders/my-orders", {
+        const res = await fetch(`${API_BASE_URL}/api/orders/my-orders`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

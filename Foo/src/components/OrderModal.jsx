@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../config";
 
 export default function OrderModal({ selectedItems, supermarket, token, onClose, onOrderPlaced }) {
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ export default function OrderModal({ selectedItems, supermarket, token, onClose,
         quantity: item.quantity,
       }));
 
-      const res = await fetch("http://localhost:5000/api/orders", {
+      const res = await fetch(`${API_BASE_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

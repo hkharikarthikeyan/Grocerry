@@ -9,6 +9,7 @@ import AuthModal from "./components/AuthModal";
 import OrderModal from "./components/OrderModal";
 import TrackingPage from "./components/TrackingPage";
 
+import { API_BASE_URL } from "./config";
 import { initialUsersData, CATEGORIES as DEFAULT_CATEGORIES } from "./data/products";
 import {
   generateWhatsAppMessage,
@@ -109,7 +110,7 @@ export default function App() {
   const fetchNotifications = useCallback(async () => {
     if (!token) return;
     try {
-      const res = await fetch("http://localhost:5000/api/notifications", {
+      const res = await fetch(`${API_BASE_URL}/api/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -155,7 +156,7 @@ export default function App() {
     async function fetchSupermarkets() {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/supermarkets?district=${selectedDistrict}`
+          `${API_BASE_URL}/api/supermarkets?district=${selectedDistrict}`
         );
         const data = await res.json();
         if (data.success && data.supermarkets.length > 0) {
@@ -180,7 +181,7 @@ export default function App() {
       setLoadingProducts(true);
       try {
         const res = await fetch(
-          `http://localhost:5000/api/supermarkets/${selectedSupermarket.id}/products`
+          `${API_BASE_URL}/api/supermarkets/${selectedSupermarket.id}/products`
         );
         const data = await res.json();
         if (data.success) {

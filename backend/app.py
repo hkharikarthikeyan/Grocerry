@@ -14,9 +14,21 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'grocerry-user-secret-key-202
 
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
+# Root Health Check Route
+@app.route('/')
+def home():
+    return jsonify({
+        'status': 'online',
+        'service': 'Grocerry User Backend API',
+        'message': 'API is running successfully on Vercel!'
+    }), 200
+
 # Global Exception Handler with CORS
 @app.errorhandler(Exception)
 def handle_exception(e):
+    # Pass through 404s so Flask handles unknown endpoints normally
+    if getattr(e, 'code', 500) == 404:
+        return jsonify({'success': False, 'message': '404 Not Found'}), 404
     print(f"Server Error in FG Backend: {e}")
     response = jsonify({
         'success': False,
