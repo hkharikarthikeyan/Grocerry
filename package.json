@@ -1,6 +1,9 @@
 {
   "name": "grocerry-root",
   "private": true,
+  "workspaces": [
+    "Foo"
+  ],
   "scripts": {
     "build": "npm --prefix Foo run build"
   }
