@@ -30,11 +30,22 @@ export function generateWhatsAppLink(message, phoneNumber = "") {
   const encodedMessage = encodeURIComponent(message);
   const cleanPhone = phoneNumber ? phoneNumber.replace(/[^0-9]/g, "") : "";
 
+  // Mobile / desktop direct app protocol link
   if (cleanPhone) {
-    return `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
+    return `whatsapp://send?phone=${cleanPhone}&text=${encodedMessage}`;
   }
 
-  return `https://wa.me/?text=${encodedMessage}`;
+  return `whatsapp://send?text=${encodedMessage}`;
+}
+
+export function generateWhatsAppWebFallback(message, phoneNumber = "") {
+  const encodedMessage = encodeURIComponent(message);
+  const cleanPhone = phoneNumber ? phoneNumber.replace(/[^0-9]/g, "") : "";
+
+  if (cleanPhone) {
+    return `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodedMessage}`;
+  }
+  return `https://api.whatsapp.com/send?text=${encodedMessage}`;
 }
 
 /**
